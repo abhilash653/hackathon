@@ -1,73 +1,71 @@
-# Welcome to your Lovable project
+# Localens Connect
 
-## Project info
+Localens Connect is a Vite + React app with Supabase authentication and data access.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Run locally
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+1. Install dependencies:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+npm install
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. Create a local environment file:
 
-# Step 3: Install the necessary dependencies.
-npm i
+```sh
+cp .env.example .env
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Add your Supabase values to `.env`:
+
+```env
+VITE_SUPABASE_URL=your-supabase-project-url
+VITE_SUPABASE_PUBLISHABLE_KEY=your-supabase-anon-key
+```
+
+4. Start the dev server:
+
+```sh
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Build
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```sh
+npm run build
+```
 
-**Use GitHub Codespaces**
+The production build output is generated in `dist/`.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Deploy
 
-## What technologies are used for this project?
+This project is ready for static hosting on Netlify or Vercel.
 
-This project is built with:
+### Netlify
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- Import the GitHub repository into Netlify.
+- Build command: `npm run build`
+- Publish directory: `dist`
+- Add environment variables:
+  - `VITE_SUPABASE_URL`
+  - `VITE_SUPABASE_PUBLISHABLE_KEY`
+- Deploy the site.
 
-## How can I deploy this project?
+The repo includes `netlify.toml` with an SPA redirect so routes like `/explore` work on refresh.
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### Vercel
 
-## Can I connect a custom domain to my Lovable project?
+- Import the GitHub repository into Vercel.
+- Framework preset: `Vite`
+- Build command: `npm run build`
+- Output directory: `dist`
+- Add environment variables:
+  - `VITE_SUPABASE_URL`
+  - `VITE_SUPABASE_PUBLISHABLE_KEY`
+- Deploy the project.
 
-Yes, you can!
+The repo includes `vercel.json` with an SPA rewrite for client-side routing.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Important note about environment files
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+`.env` was previously tracked in git. For a public repository, move real keys into hosting platform environment variables and rotate any keys that should no longer stay in git history.
